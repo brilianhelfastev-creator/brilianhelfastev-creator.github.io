@@ -11,8 +11,13 @@ const pool = mysql.createPool({
   connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT) || 10,
   queueLimit: 0,
   enableKeepAlive: true,
-  // SSL Configuration untuk Aiven Cloud MySQL
-  ssl: process.env.NODE_ENV === "production" ? "Amazon RootCA1" : false,
+  // SSL Configuration untuk Aiven Cloud MySQL - Allow any certificate
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? {
+          rejectUnauthorized: false,
+        }
+      : false,
 });
 
 // Handle pool errors
