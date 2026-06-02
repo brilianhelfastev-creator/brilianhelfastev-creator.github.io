@@ -6,7 +6,7 @@
     "watchDist": "Backend"
   },
   "deploy": {
-    "startCommand": "node Backend/index.js",
+    "startCommand": "node Backend/script.js",
     "restartOnFailure": true
   }
 }
