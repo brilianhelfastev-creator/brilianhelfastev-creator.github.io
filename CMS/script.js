@@ -2,12 +2,12 @@
 // CMS DASHBOARD - ARTIKEL MANAGEMENT (CONNECTED TO RAILWAY)
 // ============================================
 
-// URL BACKEND LOKAL
-const API_URL = "http://localhost:5001";
+// URL BACKEND PRODUCTION - VERCEL
+const API_URL = "https://profile-backend-phi.vercel.app";
 
 // Proteksi halaman: cek apakah user sudah login
 if (sessionStorage.getItem("isLoggedIn") !== "true") {
-  window.location.href = "../Frontend/index.html";
+  window.location.href = "../index.html"; // kembali ke halaman utama jika belum login
 }
 
 // ============================================
@@ -192,7 +192,7 @@ window.logoutAdmin = () => {
   if (confirm("Apakah Anda yakin ingin keluar?")) {
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("userInfo");
-    window.location.href = "../Frontend/index.html";
+    window.location.href = "../index.html";
   }
 };
 
