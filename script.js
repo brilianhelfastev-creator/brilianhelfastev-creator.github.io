@@ -3,7 +3,7 @@
 // ============================================
 
 // URL BACKEND PRODUCTION - VERCEL
-const API_URL = "https://profile-backend-phi.vercel.app";
+const API_URL = "https://profile-backend-6fbfm6ide-brilianhelfastev-creators-projects.vercel.app";
 
 // Fungsi async untuk login ke backend Railway
 const loginKeBackend = async (username, password) => {
