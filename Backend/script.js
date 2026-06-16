@@ -9,14 +9,17 @@ const PORT = 5001;
 const allowedOrigins = [
   "http://localhost:5500",
   "http://127.0.0.1:5500",
-  "https://brilianhelfastev-creator.github.io"
-];
+  "https://brilianhelfastev-creator.github.io",
+  process.env.CORS_ORIGIN
+].filter(Boolean); // Filter out undefined values
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.includes(origin) || origin.startsWith("https://brilianhelfastev-creator.github.io")) {
       callback(null, true);
     } else {
+      console.log('Blocked by CORS:', origin);
       callback(new Error("CORS policy violation"));
     }
   },
@@ -195,8 +198,11 @@ app.listen(PORT, async () => {
   console.log("========================================\n");
   try {
     await db.query("SELECT 1");
-    console.log("📌 [Database]: Sukses terhubung ke MySQL XAMPP lokal.");
+    console.log("📌 [Database]: Sukses terhubung ke database MySQL.");
   } catch (err) {
-    console.error("❌ [Database]: Gagal! Pastikan MySQL XAMPP sudah di-START.");
+    console.error("❌ [Database]: Gagal! Pastikan konfigurasi database benar.");
   }
 });
+
+// Wajib diexport untuk Vercel Serverless Functions
+module.exports = app;
