@@ -2,7 +2,7 @@
   "name": "Brilian Helfanindo Stevani",
   "short_name": "Brilian Dev",
   "description": "Portofolio Digital Brilian Helfanindo Stevani",
-  "start_url": "/Profile-Brilian-Helfanindo-Stevani/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
