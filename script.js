@@ -251,13 +251,30 @@ const checkLoginStatus = () => {
   const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
   const loginContainer = document.getElementById("login-container");
   const mainWrapper = document.getElementById("main-wrapper");
+  const pwaLanding = document.getElementById("pwa-landing");
 
   if (isLoggedIn) {
     if (loginContainer) loginContainer.style.display = "none";
+    if (pwaLanding) pwaLanding.style.display = "none";
     if (mainWrapper) mainWrapper.style.display = "block";
   } else {
-    if (loginContainer) loginContainer.style.display = "flex";
+    if (pwaLanding) pwaLanding.style.display = "flex";
+    if (loginContainer) loginContainer.style.display = "none";
     if (mainWrapper) mainWrapper.style.display = "none";
+  }
+};
+
+// Setup tombol Masuk di PWA Landing
+const setupPWALanding = () => {
+  const pwaLoginBtn = document.getElementById("pwa-login-btn");
+  const pwaLanding = document.getElementById("pwa-landing");
+  const loginContainer = document.getElementById("login-container");
+
+  if (pwaLoginBtn) {
+    pwaLoginBtn.addEventListener("click", () => {
+      if (pwaLanding) pwaLanding.style.display = "none";
+      if (loginContainer) loginContainer.style.display = "flex";
+    });
   }
 };
 
@@ -491,6 +508,7 @@ const setupServiceWorker = () => {
 // Initial calls
 window.addEventListener("DOMContentLoaded", () => {
   checkLoginStatus();
+  setupPWALanding();
   toggleAuthForms();
   setupLoginForm();
   setupRegisterForm();

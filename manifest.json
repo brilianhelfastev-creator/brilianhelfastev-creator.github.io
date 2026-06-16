@@ -1,0 +1,21 @@
+{
+  "name": "Brilian Helfanindo Stevani",
+  "short_name": "Brilian Dev",
+  "description": "Portofolio Digital Brilian Helfanindo Stevani",
+  "start_url": "/Profile-Brilian-Helfanindo-Stevani/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "assets/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
