@@ -455,37 +455,46 @@ const muatArtikel = async () => {
 
 // Fungsi untuk memuat peta
 const loadMapLocation = async () => {
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) return;
+
+  // Koordinat default: Rumah Brilian di Karangduwur, Kebumen, Jawa Tengah
+  const DEFAULT_LAT = -7.7598799;
+  const DEFAULT_LNG = 109.4117840;
+  const DEFAULT_LABEL = "Karangduwur, Ayah, Kebumen, Jawa Tengah";
+
+  let lat = DEFAULT_LAT;
+  let lng = DEFAULT_LNG;
+  let label = DEFAULT_LABEL;
+
   try {
     const response = await fetch(`${API_URL}/api/auth/users`);
     const result = await response.json();
     
     if (result.success && result.data && result.data.length > 0) {
-      // Ambil user pertama dari database untuk lokasi
-      const user = result.data[0]; 
-      
-      if (user.latitude && user.longitude) {
-        const lat = parseFloat(user.latitude);
-        const lng = parseFloat(user.longitude);
-
-        const mapContainer = document.getElementById('map');
-        if (!mapContainer) return;
-
-        // Inisialisasi Leaflet Map
-        const map = L.map('map').setView([lat, lng], 13);
-        
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        L.marker([lat, lng]).addTo(map)
-          .bindPopup(`<b>Lokasi: ${user.username}</b><br>Lat: ${lat}<br>Lng: ${lng}`)
-          .openPopup();
+      const user = result.data[0];
+      if (user.latitude && user.longitude &&
+          parseFloat(user.latitude) !== -6.200000) {
+        lat = parseFloat(user.latitude);
+        lng = parseFloat(user.longitude);
+        label = `Lokasi: ${user.username}`;
       }
     }
   } catch (error) {
-    console.error("Gagal memuat peta Leaflet:", error);
+    console.warn("Gagal ambil koordinat dari DB, pakai koordinat default:", error);
   }
+
+  // Inisialisasi Leaflet Map
+  const map = L.map('map').setView([lat, lng], 15);
+  
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  L.marker([lat, lng]).addTo(map)
+    .bindPopup(`<b>📍 ${label}</b><br>Lat: ${lat}<br>Lng: ${lng}`)
+    .openPopup();
 };
 
 // Fungsi Registrasi Service Worker & Push Notification
