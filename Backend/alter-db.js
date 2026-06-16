@@ -12,8 +12,8 @@ const connection = mysql.createConnection({
 
 const sql = `
 ALTER TABLE users 
-ADD COLUMN IF NOT EXISTS latitude DECIMAL(10, 8) DEFAULT -6.200000,
-ADD COLUMN IF NOT EXISTS longitude DECIMAL(11, 8) DEFAULT 106.816666;
+ADD COLUMN latitude DECIMAL(10, 8) DEFAULT -6.200000,
+ADD COLUMN longitude DECIMAL(11, 8) DEFAULT 106.816666;
 `;
 
 connection.query(sql, (err, results) => {
