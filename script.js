@@ -540,31 +540,44 @@ window.addEventListener("DOMContentLoaded", () => {
   // Easter Egg 2: Foto Dilempar on Keahlian Utama
   const keahlianTitle = document.getElementById("keahlianTitle");
   if (keahlianTitle) {
-    keahlianTitle.addEventListener("dblclick", () => {
-      const throwImg = document.createElement("img");
-      throwImg.src = "assets/FotoDiLempar.jpeg";
-      throwImg.style.position = "fixed";
-      throwImg.style.top = "50%";
-      throwImg.style.left = "-300px";
-      throwImg.style.width = "250px";
-      throwImg.style.borderRadius = "20px";
-      throwImg.style.boxShadow = "0 15px 40px rgba(0,0,0,0.5)";
-      throwImg.style.zIndex = "99999";
-      throwImg.style.transition = "all 1.5s cubic-bezier(0.42, 0, 0.58, 1)"; // ease-in-out
-      throwImg.style.transform = "translateY(-50%) rotate(-180deg)";
+    let titleClickCount = 0;
+    let titleClickTimer;
+
+    keahlianTitle.addEventListener("click", () => {
+      titleClickCount++;
+      clearTimeout(titleClickTimer);
       
-      document.body.appendChild(throwImg);
+      if (titleClickCount >= 2) {
+        titleClickCount = 0;
+        const throwImg = document.createElement("img");
+        throwImg.src = "assets/FotoDiLempar.jpeg";
+        throwImg.style.position = "fixed";
+        throwImg.style.top = "50%";
+        throwImg.style.left = "-300px";
+        throwImg.style.width = "250px";
+        throwImg.style.borderRadius = "20px";
+        throwImg.style.boxShadow = "0 15px 40px rgba(0,0,0,0.5)";
+        throwImg.style.zIndex = "99999";
+        throwImg.style.transition = "all 1.5s cubic-bezier(0.42, 0, 0.58, 1)"; // ease-in-out
+        throwImg.style.transform = "translateY(-50%) rotate(-180deg)";
+        
+        document.body.appendChild(throwImg);
 
-      // Trigger reflow
-      void throwImg.offsetWidth;
+        // Trigger reflow
+        void throwImg.offsetWidth;
 
-      // Animate throwing across screen
-      throwImg.style.left = "120vw";
-      throwImg.style.transform = "translateY(-50%) rotate(720deg)";
+        // Animate throwing across screen
+        throwImg.style.left = "120vw";
+        throwImg.style.transform = "translateY(-50%) rotate(720deg)";
 
-      setTimeout(() => {
-        throwImg.remove();
-      }, 1500);
+        setTimeout(() => {
+          throwImg.remove();
+        }, 1500);
+      } else {
+        titleClickTimer = setTimeout(() => {
+          titleClickCount = 0;
+        }, 500);
+      }
     });
   }
 
