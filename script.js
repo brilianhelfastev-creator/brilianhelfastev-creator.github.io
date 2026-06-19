@@ -620,6 +620,47 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Handle Hamburger Action Menu
+  const hamburgerActionBtn = document.getElementById("hamburgerActionBtn");
+  const actionDropdownMenu = document.getElementById("actionDropdownMenu");
+
+  if (hamburgerActionBtn && actionDropdownMenu) {
+    hamburgerActionBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      actionDropdownMenu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!hamburgerActionBtn.contains(e.target) && !actionDropdownMenu.contains(e.target)) {
+        actionDropdownMenu.classList.remove("active");
+      }
+    });
+  }
+
+  // Handle PWA Installation
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  const installPWABtn = document.getElementById("installPWABtn");
+  if (installPWABtn) {
+    installPWABtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+        deferredPrompt = null;
+      } else {
+        alert("Aplikasi sudah terinstal, atau buka di Chrome/Safari yang mendukung install PWA.");
+      }
+      if (actionDropdownMenu) {
+        actionDropdownMenu.classList.remove("active");
+      }
+    });
+  }
+
   // Karena map butuh div yang visible, lebih baik loadMapLocation dipanggil
   // setelah UI dipastikan terbuka jika menggunakan hide/show div
   setTimeout(() => {
