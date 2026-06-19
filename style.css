@@ -355,6 +355,9 @@ body {
 
 .animate-text {
   opacity: 0;
+}
+
+.play-animation .animate-text {
   animation: slideFromPhoto 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 

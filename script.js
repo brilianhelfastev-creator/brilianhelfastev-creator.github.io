@@ -334,9 +334,16 @@ const revealOnScroll = () => {
 
   revealElements.forEach((el) => {
     const top = el.getBoundingClientRect().top;
-    if (top < triggerBottom) {
+    const bottom = el.getBoundingClientRect().bottom;
+    
+    if (top < triggerBottom && bottom > 0) {
       el.style.opacity = "1";
       el.style.transform = "translateY(0)";
+      el.classList.add("play-animation");
+    } else {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(30px)";
+      el.classList.remove("play-animation");
     }
   });
 };
