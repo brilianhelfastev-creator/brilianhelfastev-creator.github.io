@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio | Brilian Helfanindo</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" href="assets/web-app-manifest-192x192.png">
+    <script src="pwa-handler.js" defer></script>
   </head>
   <body>
     <header class="header">
@@ -36,8 +42,8 @@
 
     <!-- Floating Action Button -->
     <div id="fabContainer" class="fab-container">
-      <button id="hamburgerActionBtn" class="fab-btn">
-        &#9776;
+      <button id="hamburgerActionBtn" class="fab-btn" style="padding: 0; overflow: hidden;">
+        <img src="assets/web-app-manifest-192x192.png" alt="Menu" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </button>
       <div id="actionDropdownMenu" class="action-dropdown-menu">
         <button id="installPWABtn" class="dropdown-item">Download Aplikasi (PWA)</button>
