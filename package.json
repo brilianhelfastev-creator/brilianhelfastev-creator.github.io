@@ -1,6 +1,7 @@
 {
   "name": "brilian-portfolio",
   "version": "1.0.0",
+  "private": true,
   "description": "Modern portfolio website with CMS and user authentication",
   "main": "Backend/script.js",
   "scripts": {
@@ -21,12 +22,9 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/brilianhelfastev-creator/Profile-Brilian-Helfanindo-Stevani.git"
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "dependencies": {
-    "all": "^0.0.0"
   }
 }

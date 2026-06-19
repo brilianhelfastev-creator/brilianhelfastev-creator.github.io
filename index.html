@@ -14,7 +14,7 @@
   </head>
   <body>
     <!-- PWA Landing Container (Ala X) -->
-    <div id="pwa-landing" class="pwa-landing-screen">
+    <div id="pwa-landing" class="pwa-landing-screen" style="display: none;">
       <div class="pwa-container">
         <!-- Menggunakan web-app-manifest-192x192.png sebagai logo -->
         <img src="assets/web-app-manifest-192x192.png" alt="Logo App" class="logo">
@@ -129,7 +129,7 @@
     </div>
 
     <!-- Main Content Wrapper -->
-    <div id="main-wrapper" style="display: none">
+    <div id="main-wrapper">
       <header class="header">
         <div class="container nav">
           <div class="logo">Brilian.dev</div>
@@ -140,9 +140,10 @@
               <li><a href="#skills">Keahlian</a></li>
               <li><a href="#cms-project">Proyek</a></li>
               <li><a href="#kontak">Kontak</a></li>
-              <li class="menu-actions">
+              <li class="menu-actions" style="display: flex; align-items: center;">
+                <button id="notifBtn" class="nav-icon-btn" style="margin-right: 15px;" title="Notifikasi">🔔</button>
                 <a href="./CMS/index.html" class="nav-cms-btn">Buka CMS</a>
-                <button id="logoutBtn" class="nav-cms-btn logout-btn">
+                <button id="logoutBtn" class="nav-cms-btn logout-btn" style="display: none;">
                   Logout
                 </button>
               </li>
@@ -168,8 +169,8 @@
               <a href="#cms-project" class="btn btn-primary">Lihat Projek</a>
               <a
                 href="#kontak"
-                class="btn"
-                style="color: var(--text-light); margin-left: 1rem"
+                class="btn btn-outline"
+                style="margin-left: 1rem"
                 >Hubungi Saya</a
               >
             </div>
@@ -186,26 +187,36 @@
 
           <div class="profile-card">
             <div class="profile-img-container">
-              <img src="assets/Foto_Brilian.jpeg" alt="Brilian Helfanindo" />
+              <img id="profilePhoto" src="assets/Foto_Brilian.jpeg" alt="Brilian Helfanindo" style="cursor: pointer;" />
             </div>
 
             <div class="profile-info">
               <ul class="info-list">
-                <li><strong>Nama:</strong> Brilian Helfanindo Stevani</li>
-                <li><strong>TTL:</strong> Kebumen, 18 Februari 2006</li>
-                <li>
-                  <strong>Alamat:</strong> Karangduwur, Ayah, Kebumen, Jawa
-                  Tengah
-                </li>
-                <li><strong>Email:</strong> brilianhelfastev@gmail.com</li>
-                <li>
-                  <strong>Pendidikan:</strong> Mahasiswa Teknologi Informatika
-                </li>
-              </ul>
-              <div
-                class="profil-bio"
-                style="margin-top: 2rem; color: var(--text-dim)"
-              >
+              <li>
+                <strong class="animate-text delay-1">Nama</strong> 
+                <span class="animate-text delay-2">Brilian Helfanindo Stevani</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-3">TTL</strong> 
+                <span class="animate-text delay-4">Kebumen, 18 Februari 2006</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-5">Alamat</strong> 
+                <span class="animate-text delay-6">Karangduwur, Ayah, Kebumen, Jawa Tengah</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-7">Email</strong> 
+                <span class="animate-text delay-8">brilianhelfastev@gmail.com</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-9">Pendidikan</strong> 
+                <span class="animate-text delay-10">Mahasiswa Teknologi Informatika</span>
+              </li>
+            </ul>
+            <div
+              class="profil-bio animate-text delay-11"
+              style="margin-top: 2rem; color: var(--text-dim)"
+            >
                 <p>
                   Saya adalah seseorang yang sangat tertarik di bidang Teknologi
                   Informatika. Saat ini saya fokus mengembangkan kemampuan dalam
@@ -233,7 +244,7 @@
       <section id="skills" class="section">
         <div class="container">
           <div class="section-title">
-            <h2>Keahlian Utama</h2>
+            <h2 id="keahlianTitle" style="cursor: pointer;" title="Klik 2 kali!">Keahlian Utama</h2>
             <div class="underline"></div>
           </div>
 

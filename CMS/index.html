@@ -12,7 +12,7 @@
     <!-- ===== LOGIN SECTION ===== -->
     <div id="cms-login-section" style="display: none;">
       <div class="cms-login-wrapper">
-        <div class="cms-login-box">
+        <div class="cms-login-box" id="cms-login-box">
           <div class="cms-login-logo">
             <div class="cms-login-icon">🔐</div>
             <h1>Admin CMS</h1>
@@ -49,6 +49,49 @@
               Masuk ke Dashboard
             </button>
           </form>
+
+          <p style="text-align:center; margin-top:15px; color:#94a3b8; font-size:0.9rem;">
+            Belum punya akun? <a href="#" id="showRegister" style="color:#60a5fa; text-decoration:none;">Daftar di sini</a>
+          </p>
+
+          <a href="../index.html" class="back-link" style="display:block; text-align:center; margin-top: 20px;">
+            ← Kembali ke Profil
+          </a>
+        </div>
+
+        <div class="cms-login-box" id="cms-register-box" style="display: none;">
+          <div class="cms-login-logo">
+            <div class="cms-login-icon">📝</div>
+            <h1>Buat Akun CMS</h1>
+            <p>Daftar untuk membuat dan mengelola artikel</p>
+          </div>
+
+          <form id="cmsRegisterForm">
+            <div class="input-group">
+              <label for="reg-username">Username</label>
+              <input type="text" id="reg-username" placeholder="Masukkan username..." required />
+            </div>
+
+            <div class="input-group">
+              <label for="reg-password">Password</label>
+              <input type="password" id="reg-password" placeholder="Minimal 6 karakter..." required />
+            </div>
+            
+            <div class="input-group">
+              <label for="reg-confirm">Konfirmasi Password</label>
+              <input type="password" id="reg-confirm" placeholder="Ketik ulang password..." required />
+            </div>
+
+            <p id="cmsRegisterMessage" class="cms-login-message"></p>
+
+            <button type="submit" id="cmsRegisterBtn" class="btn-login-cms">
+              Daftar Sekarang
+            </button>
+          </form>
+
+          <p style="text-align:center; margin-top:15px; color:#94a3b8; font-size:0.9rem;">
+            Sudah punya akun? <a href="#" id="showLogin" style="color:#60a5fa; text-decoration:none;">Masuk di sini</a>
+          </p>
 
           <a href="../index.html" class="back-link" style="display:block; text-align:center; margin-top: 20px;">
             ← Kembali ke Profil

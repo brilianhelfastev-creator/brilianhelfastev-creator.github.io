@@ -22,7 +22,10 @@
             <li><a href="#skills">Keahlian</a></li>
             <li><a href="#cms-project">Proyek</a></li>
             <li><a href="#kontak">Kontak</a></li>
-            <li><a href="./CMS/index.html" class="nav-cms-btn">Buka CMS</a></li>
+            <li class="menu-actions" style="display: flex; align-items: center;">
+              <button id="notifBtn" class="nav-icon-btn" style="margin-right: 15px;" title="Notifikasi">🔔</button>
+              <a href="./CMS/index.html" class="nav-cms-btn">Buka CMS</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -45,8 +48,8 @@
             <a href="#cms-project" class="btn btn-primary">Lihat Projek</a>
             <a
               href="#kontak"
-              class="btn"
-              style="color: var(--text-light); margin-left: 1rem"
+              class="btn btn-outline"
+              style="margin-left: 1rem"
               >Hubungi Saya</a
             >
           </div>
@@ -63,23 +66,34 @@
 
         <div class="profile-card">
           <div class="profile-img-container">
-            <img src="assets/Foto_Brilian.jpeg" alt="Brilian Helfanindo" />
+            <img id="profilePhoto" src="assets/Foto_Brilian.jpeg" alt="Brilian Helfanindo" style="cursor: pointer;" />
           </div>
 
           <div class="profile-info">
             <ul class="info-list">
-              <li><strong>Nama:</strong> Brilian Helfanindo Stevani</li>
-              <li><strong>TTL:</strong> Kebumen, 18 Februari 2006</li>
               <li>
-                <strong>Alamat:</strong> Karangduwur, Ayah, Kebumen, Jawa Tengah
+                <strong class="animate-text delay-1">Nama</strong> 
+                <span class="animate-text delay-2">Brilian Helfanindo Stevani</span>
               </li>
-              <li><strong>Email:</strong> brilianhelfastev@gmail.com</li>
               <li>
-                <strong>Pendidikan:</strong> Mahasiswa Teknologi Informatika
+                <strong class="animate-text delay-3">TTL</strong> 
+                <span class="animate-text delay-4">Kebumen, 18 Februari 2006</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-5">Alamat</strong> 
+                <span class="animate-text delay-6">Karangduwur, Ayah, Kebumen, Jawa Tengah</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-7">Email</strong> 
+                <span class="animate-text delay-8">brilianhelfastev@gmail.com</span>
+              </li>
+              <li>
+                <strong class="animate-text delay-9">Pendidikan</strong> 
+                <span class="animate-text delay-10">Mahasiswa Teknologi Informatika</span>
               </li>
             </ul>
             <div
-              class="profil-bio"
+              class="profil-bio animate-text delay-11"
               style="margin-top: 2rem; color: var(--text-dim)"
             >
               <p>
@@ -97,7 +111,7 @@
     <section id="skills" class="section">
       <div class="container">
         <div class="section-title">
-          <h2>Keahlian Utama</h2>
+          <h2 id="keahlianTitle" style="cursor: pointer;" title="Klik 2 kali!">Keahlian Utama</h2>
           <div class="underline"></div>
         </div>
 
@@ -154,6 +168,19 @@
           </p>
           <a href="../CMS/index.html" class="btn cms-glow-btn"
             >Kelola Konten Sekarang</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="artikel" class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Artikel Terbaru</h2>
+          <div class="underline"></div>
+        </div>
+        <div id="daftarArtikelProfil" class="articles-grid">
+          <!-- Artikel akan dimuat di sini -->
+          <p class="loading-msg">Memuat artikel...</p>
         </div>
       </div>
     </section>

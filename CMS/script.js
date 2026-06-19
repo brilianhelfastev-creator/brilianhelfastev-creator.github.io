@@ -239,6 +239,107 @@ function setupCMSLoginForm() {
 }
 
 // ============================================
+// SETUP FORM REGISTER CMS
+// ============================================
+function setupCMSRegisterForm() {
+  const cmsRegisterForm = document.getElementById("cmsRegisterForm");
+  if (!cmsRegisterForm) return;
+
+  cmsRegisterForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById("reg-username").value.trim();
+    const password = document.getElementById("reg-password").value.trim();
+    const confirmPassword = document.getElementById("reg-confirm").value.trim();
+    const messageEl = document.getElementById("cmsRegisterMessage");
+    const regBtn = document.getElementById("cmsRegisterBtn");
+
+    if (!username || !password || !confirmPassword) {
+      messageEl.textContent = "Semua field harus diisi!";
+      messageEl.className = "cms-login-message error";
+      return;
+    }
+
+    if (password.length < 6) {
+      messageEl.textContent = "Password minimal 6 karakter!";
+      messageEl.className = "cms-login-message error";
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      messageEl.textContent = "Konfirmasi password tidak cocok!";
+      messageEl.className = "cms-login-message error";
+      return;
+    }
+
+    // Loading state
+    regBtn.disabled = true;
+    regBtn.textContent = "Sedang mendaftar...";
+    messageEl.textContent = "";
+    messageEl.className = "cms-login-message";
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, confirmPassword }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        messageEl.textContent = data.message || "Pendaftaran sukses! Silakan login.";
+        messageEl.className = "cms-login-message success";
+        cmsRegisterForm.reset();
+
+        setTimeout(() => {
+          document.getElementById("cms-register-box").style.display = "none";
+          document.getElementById("cms-login-box").style.display = "block";
+          document.getElementById("cms-username").value = username;
+          document.getElementById("cms-username").focus();
+          messageEl.textContent = "";
+        }, 2000);
+      } else {
+        messageEl.textContent = data.message || "Pendaftaran gagal!";
+        messageEl.className = "cms-login-message error";
+        regBtn.disabled = false;
+        regBtn.textContent = "Daftar Sekarang";
+      }
+    } catch (error) {
+      console.error("Register error:", error);
+      messageEl.textContent = "Gagal terhubung ke server. Coba lagi.";
+      messageEl.className = "cms-login-message error";
+      regBtn.disabled = false;
+      regBtn.textContent = "Daftar Sekarang";
+    }
+  });
+}
+
+// ============================================
+// SETUP TOGGLE LOGIN/REGISTER
+// ============================================
+function setupToggleForms() {
+  const showRegister = document.getElementById("showRegister");
+  const showLogin = document.getElementById("showLogin");
+  const loginBox = document.getElementById("cms-login-box");
+  const registerBox = document.getElementById("cms-register-box");
+
+  if (showRegister && showLogin && loginBox && registerBox) {
+    showRegister.addEventListener("click", (e) => {
+      e.preventDefault();
+      loginBox.style.display = "none";
+      registerBox.style.display = "block";
+    });
+
+    showLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      registerBox.style.display = "none";
+      loginBox.style.display = "block";
+    });
+  }
+}
+
+// ============================================
 // Validasi Form
 // ============================================
 function validasi(data) {
@@ -378,6 +479,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   checkCMSLogin();
   setupCMSLoginForm();
+  setupCMSRegisterForm();
+  setupToggleForms();
 });
 
 // HAPUS DATA dari Server

@@ -248,20 +248,14 @@ const setupLogoutBtn = () => {
 
 // Cek status login saat page load
 const checkLoginStatus = () => {
-  const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+  // Profil sekarang bersifat publik, jadi tidak perlu menyembunyikan mainWrapper
   const loginContainer = document.getElementById("login-container");
   const mainWrapper = document.getElementById("main-wrapper");
   const pwaLanding = document.getElementById("pwa-landing");
 
-  if (isLoggedIn) {
-    if (loginContainer) loginContainer.style.display = "none";
-    if (pwaLanding) pwaLanding.style.display = "none";
-    if (mainWrapper) mainWrapper.style.display = "block";
-  } else {
-    if (pwaLanding) pwaLanding.style.display = "flex";
-    if (loginContainer) loginContainer.style.display = "none";
-    if (mainWrapper) mainWrapper.style.display = "none";
-  }
+  if (loginContainer) loginContainer.style.display = "none";
+  if (pwaLanding) pwaLanding.style.display = "none";
+  if (mainWrapper) mainWrapper.style.display = "block";
 };
 
 // Setup tombol Masuk di PWA Landing
@@ -503,12 +497,6 @@ const setupServiceWorker = () => {
     navigator.serviceWorker.register('sw.js')
       .then((swReg) => {
         console.log('Service Worker berhasil didaftarkan!', swReg);
-        // Meminta Izin Notifikasi
-        Notification.requestPermission().then((permission) => {
-          if (permission === 'granted') {
-            console.log('Izin Notifikasi Diberikan!');
-          }
-        });
       })
       .catch((error) => console.error('Gagal daftar Service Worker:', error));
   }
@@ -526,6 +514,99 @@ window.addEventListener("DOMContentLoaded", () => {
   muatArtikel();
   setupServiceWorker();
   
+  const notifBtn = document.getElementById("notifBtn");
+  if (notifBtn) {
+    notifBtn.addEventListener("click", async () => {
+      if (!("Notification" in window)) {
+        alert("Browser kamu tidak mendukung notifikasi.");
+        return;
+      }
+      
+      if (Notification.permission === "granted") {
+        alert("Kamu sudah mengaktifkan notifikasi! Kamu akan menerima info artikel terbaru.");
+      } else if (Notification.permission !== "denied") {
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+          alert("Mantap! Notifikasi aktif. Kamu akan dapat info jika ada update web atau artikel baru.");
+        } else {
+          alert("Izin notifikasi ditolak. Kamu bisa mengaktifkannya kapan saja.");
+        }
+      } else {
+        alert("Kamu sebelumnya memblokir notifikasi. Silakan buka pengaturan browser untuk mengizinkan.");
+      }
+    });
+  }
+
+  // Easter Egg 2: Foto Dilempar on Keahlian Utama
+  const keahlianTitle = document.getElementById("keahlianTitle");
+  if (keahlianTitle) {
+    keahlianTitle.addEventListener("dblclick", () => {
+      const throwImg = document.createElement("img");
+      throwImg.src = "assets/FotoDiLempar.jpeg";
+      throwImg.style.position = "fixed";
+      throwImg.style.top = "50%";
+      throwImg.style.left = "-300px";
+      throwImg.style.width = "250px";
+      throwImg.style.borderRadius = "20px";
+      throwImg.style.boxShadow = "0 15px 40px rgba(0,0,0,0.5)";
+      throwImg.style.zIndex = "99999";
+      throwImg.style.transition = "all 1.5s cubic-bezier(0.42, 0, 0.58, 1)"; // ease-in-out
+      throwImg.style.transform = "translateY(-50%) rotate(-180deg)";
+      
+      document.body.appendChild(throwImg);
+
+      // Trigger reflow
+      void throwImg.offsetWidth;
+
+      // Animate throwing across screen
+      throwImg.style.left = "120vw";
+      throwImg.style.transform = "translateY(-50%) rotate(720deg)";
+
+      setTimeout(() => {
+        throwImg.remove();
+      }, 1500);
+    });
+  }
+
+  // Easter Egg: Click profile photo 5 times
+  const profilePhoto = document.getElementById("profilePhoto");
+  if (profilePhoto) {
+    let clickCount = 0;
+    let clickTimer;
+
+    // Create the overlay elements
+    const overlay = document.createElement('div');
+    overlay.className = 'easter-egg-overlay';
+    overlay.innerHTML = `
+      <div class="easter-egg-box">
+        <h1 class="easter-egg-title">WARNING!!!</h1>
+        <p class="easter-egg-text">Kalo suka tuh bilang 😂</p>
+        <button class="easter-egg-close">Ampun Bang</button>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const closeBtn = overlay.querySelector('.easter-egg-close');
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+    });
+
+    profilePhoto.addEventListener("click", () => {
+      clickCount++;
+      clearTimeout(clickTimer);
+      
+      if (clickCount >= 5) {
+        overlay.classList.add('active');
+        clickCount = 0;
+      } else {
+        // Reset the counter if they don't click again within 800ms
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 800);
+      }
+    });
+  }
+
   // Karena map butuh div yang visible, lebih baik loadMapLocation dipanggil
   // setelah UI dipastikan terbuka jika menggunakan hide/show div
   setTimeout(() => {
