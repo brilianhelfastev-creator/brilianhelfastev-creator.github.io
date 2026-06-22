@@ -574,3 +574,54 @@ hr {
 
 .btn-confirm-info { background: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
 .btn-confirm-info:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4); }
+
+/* ============================================
+   🦶 FOOTER STYLES
+   ============================================ */
+.cms-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    padding: 24px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    animation: loginFadeIn 0.6s ease both;
+}
+
+.cms-footer-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 14px rgba(59, 130, 246, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cms-footer-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 22px rgba(99, 102, 241, 0.5);
+}
+
+.cms-footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cms-footer-brand {
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #3b82f6, #6366f1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+.cms-footer-copy {
+    font-size: 0.78rem;
+    color: #475569;
+    line-height: 1.2;
+}
